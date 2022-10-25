@@ -20,19 +20,23 @@ class Tetromino
 {
 private:
 	int dir;
-	vector<vector<char>> map;
+	vector< vector<char> > map;
+	vector <vector<int> > collision_map;
+	char ty;
 public:
 
 	//Tetromino(int	typ, int dir);(
 	Tetromino(e_typ obj);
 	Tetromino();
-	bool					canFit();
-	void					set_type(e_typ typ);
-	void								print();
-	int							rotate (int rot);
-	void		set_map(vector<vector<char>> map);
-
-	vector< vector<char> > get_map() { return (map);};
+	bool											canFit();
+	void								set_type(e_typ typ);
+	void											print();
+	int										rotate (int rot);
+	void					set_map(vector<vector<char>> map);
+	void 								init_collision_map();
+	inline void 					set_ty(char c){ ty = c; };
+	inline char 					get_ty(){ return (ty); };
+	inline vector< vector<char> > get_map() { return (map);};
 };
 
 void					get_info(vector<Tetromino> arr);

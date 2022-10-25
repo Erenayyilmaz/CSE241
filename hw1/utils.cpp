@@ -79,16 +79,17 @@ void						get_info(vector <Tetromino> arr)
 	int ctr = 1;
 	do
 	{
-		cout << "How many tetrominos?";
+		cout << "How many tetrominos?" <<endl;
 		cin >> tmp;
 		if (!my_atoi(tmp) && !my_isalpha(tmp))
 		{
 			ctr = 0;
 		}
 		tet_num = my_atoi(tmp);
-		cout << endl << "tet_num = " <<tet_num;
+		//cout << endl << "tet_num = " <<tet_num;
 		arr.resize(tet_num);
 		cout << "What are their types?";
+		cout << endl;
 		for (long unsigned int i = 0; i < tet_num; i++)
 		{
 			cin >> in;
@@ -100,24 +101,35 @@ void						get_info(vector <Tetromino> arr)
 				e_typ	tt;
 				tt = (e_typ)in;
 				arr[i] = Tetromino(tt);
+				//arr.push_back(Tetromino(tt));
 				ctr = 0;
 			}
-			
 		}
 		if(ctr == 1)
 			cout << "wrong, try again!";
 	} while (ctr == 1);
-	
+	Tetromino a;
+	cout << "Your tetrominos ";
+	for (int i = 0;i < tet_num;i++)
+	{
+		a = arr[i];
+		cout << endl;
+		a.print();
+		//cout << a.get_ty();
+	}
 
 }
+
+
 
 Tetromino::Tetromino(e_typ typ)
 {
 	vector< vector<char> > temp_map
 		{
-			{'0','0','0'},
-			{'0','0','0'},
-			{'0','0','0'}
+			{'0','0','0','0'},
+			{'0','0','0','0'},
+			{'0','0','0','0'},
+			{'0','0','0','0'}
 		};
 
 	switch (typ)
@@ -136,9 +148,10 @@ Tetromino::Tetromino(e_typ typ)
 	case e_typ::o :
 		temp_map =
 			{
-				{'o','o','0'},
-				{'o','o','0'},
-				{'0','0','0'}
+				{'o','o','0','0'},
+				{'o','o','0','0'},
+				{'0','0','0','0'},
+				{'0','0','0','0'}
 			};
 		map = temp_map;
 		break;
@@ -146,9 +159,10 @@ Tetromino::Tetromino(e_typ typ)
 	case e_typ::t :
 		temp_map =
 			{
-				{'t','t','t'},
-				{'0','t','0'},
-				{'0','0','0'}
+				{'t','t','t','0'},
+				{'0','t','0','0'},
+				{'0','0','0','0'},
+				{'0','0','0','0'}
 			};
 		map = temp_map;
 		break;
@@ -156,9 +170,11 @@ Tetromino::Tetromino(e_typ typ)
 	case e_typ::j :
 		temp_map =
 			{
-				{'0','j','0'},
-				{'0','j','0'},
-				{'j','j','0'}
+				{'0','j','0','0'},
+				{'0','j','0','0'},
+				{'j','j','0','0'},
+				{'0','0','0','0'}
+
 			};
 		map = temp_map;
 		break;
@@ -166,9 +182,10 @@ Tetromino::Tetromino(e_typ typ)
 	case e_typ::l :
 		temp_map =
 			{
-				{'l','0','0'},
-				{'l','0','0'},
-				{'l','l','0'}
+				{'l','0','0','0'},
+				{'l','0','0','0'},
+				{'l','l','0','0'},
+				{'0','0','0','0'}
 			};
 		map = temp_map;
 		break;
@@ -177,9 +194,10 @@ Tetromino::Tetromino(e_typ typ)
 	case e_typ::s :
 		temp_map =
 			{
-				{'0','s','s'},
-				{'s','s','0'},
-				{'0','0','0'}
+				{'0','s','s','0'},
+				{'s','s','0','0'},
+				{'0','0','0','0'},
+				{'0','0','0','0'}
 			};
 		map = temp_map;
 		break;
@@ -188,9 +206,10 @@ Tetromino::Tetromino(e_typ typ)
 	case e_typ::z :
 		temp_map =
 			{
-				{'z','z','0'},
-				{'0','z','z'},
-				{'0','0','0'}
+				{'z','z','0','0'},
+				{'0','z','z','0'},
+				{'0','0','0','0'},
+				{'0','0','0','0'}
 			};
 		map = temp_map;
 		break;
@@ -209,11 +228,11 @@ Tetromino::Tetromino()
 {
 	vector< vector<char> > map
 	{
-		{0,0,0},
-		{0,0,0},
-		{0,0,0}
+		{'0','0','0','0'},
+		{'0','0','0','0'},
+		{'0','0','0','0'},
+		{'0','0','0','0'}
 	};
-
 }
 
 void Tetromino::set_map(vector<vector<char>> map)
@@ -230,10 +249,30 @@ void Tetromino::set_map(vector<vector<char>> map)
 	}
 }
 
+void Tetromino::init_collision_map()
+{
+	long unsigned int	i = 0, j= 0;
+	long unsigned int	size_map = map.size();
+	for (; i < size_map; i++)
+	{
+		j = 0;
+		for (; j < (map[i]).size(); j++)
+		{
+			if(map[i][j] != '0')
+				collision_map[i][j] = 1;
+			else
+				collision_map[i][j] = 0;
+		}
+	}
+}
+
+
+
 int Tetromino::rotate(int rot)
 {
 	// 1 to clockwise -1 to anticlockwise
-	long unsigned int	i, j, temp = 0;
+	long unsigned int	i, j;
+	char temp = ' ';
 	long unsigned int map_size = map.size();
 	if (rot == 1)
 	{
@@ -277,7 +316,8 @@ void Tetromino::print()
 		r_size = (map[i]).size();
 		for (j = 0; j < r_size; j++)
 		{
-			cout << map[i][j];
+			if (map[i][j] != '0')
+				cout << map[i][j];
  		}
 		cout << endl;
 	}

@@ -6,10 +6,10 @@ int main()
 {
 	vector <Tetromino> arr;
 	//Tetromino a;
-	e_typ k;
-	k = e_typ::i;
-	Tetromino	a(k);
-	//get_info(arr);
+	//  e_typ k;
+	//  k = e_typ::j;
+	//  Tetromino	a(k);
+	get_info(arr);
 	return (0);
 }
 
