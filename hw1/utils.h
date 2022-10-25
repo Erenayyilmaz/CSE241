@@ -19,16 +19,19 @@ long unsigned int					my_isalpha(string c);
 class Tetromino
 {
 private:
+	vector< vector <char> > merged_map;
 	int dir;
 	vector< vector<char> > map;
-	vector <vector<int> > collision_map;
+	vector <vector<char> > collision_map;
 	char ty;
 public:
 
 	//Tetromino(int	typ, int dir);(
 	Tetromino(e_typ obj);
 	Tetromino();
-	bool											canFit();
+	bool							canFit(Tetromino other);
+	int										is_collision();
+	vector< vector <char> > 					shift_coll_map();
 	void								set_type(e_typ typ);
 	void											print();
 	int										rotate (int rot);

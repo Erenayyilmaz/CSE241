@@ -86,7 +86,7 @@ void						get_info(vector <Tetromino> arr)
 			ctr = 0;
 		}
 		tet_num = my_atoi(tmp);
-		//cout << endl << "tet_num = " <<tet_num;
+		//cout << endl << "tet_num = " <<tet_num << "casted that is : " << (long unsigned int)tet_num;
 		arr.resize(tet_num);
 		cout << "What are their types?";
 		cout << endl;
@@ -98,9 +98,44 @@ void						get_info(vector <Tetromino> arr)
 			else
 			{
 				//insert here!! tetrominos vectırune eklemeler yaoılacak tek tek
-				e_typ	tt;
-				tt = (e_typ)in;
-				arr[i] = Tetromino(tt);
+				//  e_typ	tt;
+				//  tt = static_cast <e_typ>(in);
+				//  arr[i] = Tetromino(tt);
+				if (in == 'i' || in == 'I')
+				{
+					Tetromino temporary(e_typ::i);
+					arr[i] = temporary;
+				}
+				if (in == 'o' || in == 'O')
+				{
+					Tetromino temporary(e_typ::o);
+					arr[i] = temporary;
+				}				
+				if (in == 't' || in == 'T')
+				{
+					Tetromino temporary(e_typ::t);
+					arr[i] = temporary;
+				}
+				if (in == 'j' || in == 'J')
+				{
+					Tetromino temporary(e_typ::j);
+					arr[i] = temporary;
+				}
+				if (in == 'l' || in == 'L')
+				{
+					Tetromino temporary(e_typ::l);
+					arr[i] = temporary;
+				}				
+				if (in == 's' || in == 'S')
+				{
+					Tetromino temporary(e_typ::s);
+					arr[i] = temporary;
+				}
+				if (in == 'z' || in == 'Z')
+				{
+					Tetromino temporary(e_typ::z);
+					arr[i] = temporary;
+				}
 				//arr.push_back(Tetromino(tt));
 				ctr = 0;
 			}
@@ -258,10 +293,7 @@ void Tetromino::init_collision_map()
 		j = 0;
 		for (; j < (map[i]).size(); j++)
 		{
-			if(map[i][j] != '0')
-				collision_map[i][j] = 1;
-			else
-				collision_map[i][j] = 0;
+			collision_map[i][j] = map[i][j];
 		}
 	}
 }
@@ -322,8 +354,47 @@ void Tetromino::print()
 		cout << endl;
 	}
 }
-
-bool					canFit(Tetromino other)
+int			Tetromino::is_collision()
 {
+	int coll_ctr = 0;
+	long unsigned int mm_size = merged_map.size();
+	long unsigned int mm_size2 = 0;
+	for (int i = 0; i < mm_size; i++)
+	{
+		mm_size2 = merged_map[i].size();
+		for (int j = 0; j < mm_size2; j++)
+		{
+			if (merged_map[i][j] == 2)
+				coll_ctr++;
+		}
+	}
+	return (coll_ctr);
+}
+
+vector< vector <char> > 	Tetromino::shift_coll_map()
+{
+	vector< vector <char> > tmp_coll_map;
+	
+}
+
+bool			Tetromino::canFit(Tetromino other)
+{
+	long unsigned int	size1 = collision_map.size();
+	long unsigned int	size2 = other.collision_map.size();
+	long unsigned int	i = 0, j = 0, collision_control = 0, max_collision_size = 0;
+
+	for (; i < size1; i++)
+	{
+		j = 0;
+		for (; j < collision_map[i].size(); j++)
+		{
+			merged_map[i].push_back(collision_map[i][j]);
+		}
+		j = 0;
+		for (; j < other.collision_map[i].size(); j++)
+		{
+			merged_map[i].push_back(other.collision_map[i][j]);
+		}
+	}
 
 }
