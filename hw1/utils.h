@@ -13,25 +13,21 @@ long unsigned int				my_isdigit(string	s);
 long unsigned int						is_legal(char c);
 long unsigned int					my_isalpha(string c);
 
-
-
-
 class Tetromino
 {
 private:
-	vector< vector <char> > merged_map;
-	int dir;
-	vector< vector<char> > map;
+	//vector< vector <char> > merged_map;
+	int 							dir;
+	vector< vector<char> >			 map;
 	vector <vector<char> > collision_map;
-	char ty;
+	char							 ty;
 public:
 
 	//Tetromino(int	typ, int dir);(
 	Tetromino(e_typ obj);
 	Tetromino();
-	bool							canFit(Tetromino other);
-	int										is_collision();
-	vector< vector <char> > 					shift_coll_map();
+	bool	canFit();
+	vector< vector <char> > 				get_coll_map();
 	void								set_type(e_typ typ);
 	void											print();
 	int										rotate (int rot);
@@ -43,5 +39,10 @@ public:
 };
 
 void					get_info(vector<Tetromino> arr);
+vector< vector <char> > merge_coll_maps(Tetromino other, vector< vector<char> > merged_map);
+vector< vector <char> > 					shift_coll_map();
+int		most_surf(vector< vector <char> > merged_map);
+int										is_collision(vector< vector <char> > merged_map);
+
 
 #endif

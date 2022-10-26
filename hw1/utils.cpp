@@ -31,20 +31,10 @@ long unsigned int	my_isalpha(string c)
 	while (c[ind])
 	{
 		if (c[ind] >= 65 && c[ind] <= 90)
-
-		{
-
 			return (1);
-
-		}
 
 		else if (c[ind] <= 122 && c[ind] >= 97)
-
-		{
-
 			return (1);
-
-		}
 
 		ind++;
 	}	
@@ -69,6 +59,7 @@ long unsigned int			my_atoi(string nptr)
 	return (sum);
 
 }
+
 
 void						get_info(vector <Tetromino> arr)
 {
@@ -155,6 +146,10 @@ void						get_info(vector <Tetromino> arr)
 
 }
 
+vector< vector <char> > Tetromino::get_coll_map()
+{
+	return (collision_map);
+}
 
 
 Tetromino::Tetromino(e_typ typ)
@@ -172,10 +167,10 @@ Tetromino::Tetromino(e_typ typ)
 	case e_typ::i :
 		temp_map =
 			{
-				{'i','i','i','i'},
 				{'0','0','0','0'},
 				{'0','0','0','0'},
-				{'0','0','0','0'}
+				{'0','0','0','0'},
+				{'i','i','i','i'}
 			};
 		map = temp_map;
 		break;
@@ -183,10 +178,10 @@ Tetromino::Tetromino(e_typ typ)
 	case e_typ::o :
 		temp_map =
 			{
-				{'o','o','0','0'},
-				{'o','o','0','0'},
 				{'0','0','0','0'},
-				{'0','0','0','0'}
+				{'0','0','0','0'},
+				{'o','o','0','0'},
+				{'o','o','0','0'}
 			};
 		map = temp_map;
 		break;
@@ -194,10 +189,10 @@ Tetromino::Tetromino(e_typ typ)
 	case e_typ::t :
 		temp_map =
 			{
-				{'t','t','t','0'},
-				{'0','t','0','0'},
 				{'0','0','0','0'},
-				{'0','0','0','0'}
+				{'0','0','0','0'},
+				{'0','t','0','0'},
+				{'t','t','t','0'}
 			};
 		map = temp_map;
 		break;
@@ -205,10 +200,10 @@ Tetromino::Tetromino(e_typ typ)
 	case e_typ::j :
 		temp_map =
 			{
+				{'0','0','0','0'},
 				{'0','j','0','0'},
 				{'0','j','0','0'},
-				{'j','j','0','0'},
-				{'0','0','0','0'}
+				{'j','j','0','0'}
 
 			};
 		map = temp_map;
@@ -217,10 +212,10 @@ Tetromino::Tetromino(e_typ typ)
 	case e_typ::l :
 		temp_map =
 			{
+				{'0','0','0','0'},
 				{'l','0','0','0'},
 				{'l','0','0','0'},
-				{'l','l','0','0'},
-				{'0','0','0','0'}
+				{'l','l','0','0'}
 			};
 		map = temp_map;
 		break;
@@ -229,10 +224,10 @@ Tetromino::Tetromino(e_typ typ)
 	case e_typ::s :
 		temp_map =
 			{
-				{'0','s','s','0'},
-				{'s','s','0','0'},
 				{'0','0','0','0'},
-				{'0','0','0','0'}
+				{'0','0','0','0'},
+				{'0','s','s','0'},
+				{'s','s','0','0'}
 			};
 		map = temp_map;
 		break;
@@ -241,10 +236,10 @@ Tetromino::Tetromino(e_typ typ)
 	case e_typ::z :
 		temp_map =
 			{
-				{'z','z','0','0'},
-				{'0','z','z','0'},
 				{'0','0','0','0'},
-				{'0','0','0','0'}
+				{'0','0','0','0'},
+				{'z','z','0','0'},
+				{'0','z','z','0'}
 			};
 		map = temp_map;
 		break;
@@ -297,8 +292,6 @@ void Tetromino::init_collision_map()
 		}
 	}
 }
-
-
 
 int Tetromino::rotate(int rot)
 {
@@ -354,7 +347,7 @@ void Tetromino::print()
 		cout << endl;
 	}
 }
-int			Tetromino::is_collision()
+int			is_collision(vector< vector <char> > merged_map)
 {
 	int coll_ctr = 0;
 	long unsigned int mm_size = merged_map.size();
@@ -364,37 +357,91 @@ int			Tetromino::is_collision()
 		mm_size2 = merged_map[i].size();
 		for (int j = 0; j < mm_size2; j++)
 		{
-			if (merged_map[i][j] == 2)
+			if (merged_map[i][j] != '0')
 				coll_ctr++;
 		}
 	}
 	return (coll_ctr);
 }
 
-vector< vector <char> > 	Tetromino::shift_coll_map()
+vector< vector <char> > merge_coll_maps(Tetromino other, vector< vector<char> > merged_map)
+{
+	cout << "zzzzzz";
+	vector< vector<char> > temp_merge_map = merged_map;
+	cout << "gfd";
+	vector< vector<char> > add_map = other.get_coll_map();
+	cout << "kkkkk";
+	//long unsigned int	size1 = tet1.collision_map.size();
+	long unsigned int	size1 = (other.get_coll_map()).size();
+//	long unsigned int	size2 = other.collision_map.size();
+	cout << "pppp";
+	long unsigned int	i = 0, j = 0,k = 0, collision_control = 0;
+	for (i = 0; i < size1; i++)
+	{
+		cout << "for iöine girdi size1den kucuk için doncudek index suanda " << i << endl;
+		j = 0;
+		long unsigned int	size2 = add_map[i].size();
+		merged_map[i].resize(size1 + size2);
+		for (j = 0; j < size2; j++)
+		{
+			merged_map[i][j + size1] = add_map[i][j];
+		}
+	}
+	for (int i = 0; i < merged_map.size(); i++)
+	{
+		k = 0;
+		cout <<"yutil ici for 1 " <<endl;
+		for (k = 0; k < merged_map[i].size(); k++)
+		{
+			cout << merged_map[i][k];
+		}
+		cout <<endl;
+	}
+	return (merged_map);
+}
+
+int		most_surf(vector< vector <char> > merged_map)
+{
+	int	i = 0,k = 0,counter = 0;
+	for (int i = 0; i < merged_map.size(); i++)
+	{
+		k = 0;
+		for (k = 0; k < merged_map[i].size(); k++)
+		{
+			if (isalpha(merged_map[i][k]))
+				counter++;
+		}
+	}
+	return (counter);
+}
+
+vector< vector <char> > 	shift_coll_map(vector< vector <char> > merged_map, int indx)
 {
 	vector< vector <char> > tmp_coll_map;
+	tmp_coll_map = merged_map;
+	int i;
+	int size_mm = merged_map[0].size();
+	int size_mm1 = merged_map.size();
+	for (int k = 0;k < size_mm1; k++)
+	{
+	//	i = size_mm - (4 * (indx - 1));
+		for ( i = size_mm - (4 * (indx - 1)); i > 0 ; i--)//checck that!!
+		{
+			if (isalpha(merged_map[k][i - 2]))
+				return (tmp_coll_map);
+			merged_map[k].erase(i-1);
+			//merged_map[k][i - 2] = merged_map[k][i - 1];//sadece 1 satır shift olur bunu komteol etmem gerek!!
+			//merged_map[k][i - 1] = '0';
+		}
+		
+	}
+	
+	
 	
 }
 
-bool			Tetromino::canFit(Tetromino other)
-{
-	long unsigned int	size1 = collision_map.size();
-	long unsigned int	size2 = other.collision_map.size();
-	long unsigned int	i = 0, j = 0, collision_control = 0, max_collision_size = 0;
 
-	for (; i < size1; i++)
-	{
-		j = 0;
-		for (; j < collision_map[i].size(); j++)
-		{
-			merged_map[i].push_back(collision_map[i][j]);
-		}
-		j = 0;
-		for (; j < other.collision_map[i].size(); j++)
-		{
-			merged_map[i].push_back(other.collision_map[i][j]);
-		}
-	}
+bool			Tetromino::canFit()
+{
 
 }
