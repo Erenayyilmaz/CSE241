@@ -40,7 +40,7 @@ public:
 
 void					get_info(vector<Tetromino> arr);
 vector< vector <char> > merge_coll_maps(Tetromino other, vector< vector<char> > merged_map);
-vector< vector <char> > 					shift_coll_map();
+vector< vector <char> > 					shift_coll_map(vector< vector <char> >, int indx);
 int		most_surf(vector< vector <char> > merged_map);
 int										is_collision(vector< vector <char> > merged_map);
 

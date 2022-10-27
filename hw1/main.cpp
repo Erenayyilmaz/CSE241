@@ -49,9 +49,14 @@ int main()
 	for (int i = 1; i < arr.size(); i++)
 	{
 		//int	best_surface_coll_counter = most_surf(merged_map);
+		vector< vector <char> > prev_mer_map;
+		prev_mer_map = merged_map;
 		for (int j = 0; j < 4; j++)//4 rotatoion
 		{
 			//shift
+			shift_coll_map(merged_map, i);
+			if (most_surf(merged_map) > most_surf(prev_mer_map))
+				prev_mer_map = merged_map;
 		}
 		
 	}

@@ -77,7 +77,7 @@ void						get_info(vector <Tetromino> arr)
 			ctr = 0;
 		}
 		tet_num = my_atoi(tmp);
-		//cout << endl << "tet_num = " <<tet_num << "casted that is : " << (long unsigned int)tet_num;
+		//cout << endl << "tet_num = " <<int(tet_num) << "casted that is : " << (long unsigned int)tet_num;
 		arr.resize(tet_num);
 		cout << "What are their types?";
 		cout << endl;
@@ -95,7 +95,8 @@ void						get_info(vector <Tetromino> arr)
 				if (in == 'i' || in == 'I')
 				{
 					Tetromino temporary(e_typ::i);
-					arr[i] = temporary;
+					//arr[i] = temporary;
+					arr.push_back(temporary);
 				}
 				if (in == 'o' || in == 'O')
 				{
@@ -410,6 +411,12 @@ int		most_surf(vector< vector <char> > merged_map)
 		{
 			if (isalpha(merged_map[i][k]))
 				counter++;
+			if (isalpha(merged_map[i - 1][k]))
+				counter++;
+			if (isalpha(merged_map[i][k + 1]))
+				counter++;
+			if (isalpha(merged_map[i][k - 1]))
+				counter++;
 		}
 	}
 	return (counter);
@@ -429,15 +436,13 @@ vector< vector <char> > 	shift_coll_map(vector< vector <char> > merged_map, int 
 		{
 			if (isalpha(merged_map[k][i - 2]))
 				return (tmp_coll_map);
-			merged_map[k].erase(i-1);
+			merged_map[k].erase(merged_map[k].begin() + (i-1));
 			//merged_map[k][i - 2] = merged_map[k][i - 1];//sadece 1 satır shift olur bunu komteol etmem gerek!!
 			//merged_map[k][i - 1] = '0';
 		}
 		
 	}
-	
-	
-	
+	return (merged_map);	
 }
 
 
