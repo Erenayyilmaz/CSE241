@@ -7,6 +7,61 @@ using namespace day_of_year_set_namspc;
 //using namespace day_of_year_namspc;
 
 
+ int	my_isdigit(char*	s)
+{
+	// THIS FUNCTION CONTROLS IS GIVEN STRING HAS ONLY DIGITS
+	int index = 0;
+	while (s[index])
+	{
+		if (s[index] >= '0' && s[index] <= '9')
+		{
+			return (1);
+		}
+		index++;
+	}
+	return (0);	
+}
+
+ int	my_isalpha(char* c)
+{
+		// THIS FUNCTION CONTROLS IS GIVEN STRING HAS ONLY ALPHABETICAL CHARS
+	int ind = 0;
+	while (c[ind])
+	{
+		if (c[ind] >= 65 && c[ind] <= 90)
+			return (1);
+
+		else if (c[ind] <= 122 && c[ind] >= 97)
+			return (1);
+
+		ind++;
+	}	
+	return (0);
+}
+
+ int	my_atoi(char* nptr)
+{
+	// IMITATION OF ORIGINAL ATOI FUNCTION 
+	// I TAKE ALL INPUTS AS STRING AFTER CONTROL I CHANGED THEIR TYPES
+	 int	index;
+	 int	sum;
+
+	sum = 0;
+	index = 0;
+	while ((nptr[index]) < '0' && (nptr[index]) > '9')
+		index++;
+	while ((nptr[index]) >= '0' && (nptr[index]) <= '9')
+	{
+		sum *= 10;
+		sum += (nptr[index] - '0');
+		index++;
+	}
+	return (sum);
+
+}
+
+
+
 day_of_year_set_namspc::DayOfYearSet::DayOfYearSet(vector <DayOfYear> l)
 {
 	//cout << "DayOfYearSet construtor2 called";
@@ -214,6 +269,8 @@ day_of_year_set_namspc::DayOfYearSet  day_of_year_set_namspc::DayOfYearSet::oper
 		{
 			if (is_in_set(other.elems[j]))
 				tmp[i] = other.elems[j];
+			else
+				j++;
 		}
 	}
 	cout <<endl<<endl; // BUNU sılme

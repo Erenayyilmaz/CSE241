@@ -36,15 +36,15 @@ void day_of_year_namspc::DayOfYear::set_day( int day)
 {
 	if (_month == 1 || _month == 3 ||_month == 5 ||_month == 7 ||_month == 8 ||_month == 10 ||_month == 12)
 	{
-		day = day % 31;
+		day = day % 32;
 	}
 	else if ( _month == 4 ||_month == 6 ||_month == 9 ||_month == 11)
 	{
-		day = day % 30;
+		day = day % 31;
 	}
 	else
 	{
-		day = day % 28;
+		day = day % 29;
 	}
 	_day = day;
 }
@@ -72,7 +72,7 @@ int	 day_of_year_namspc::DayOfYear::day_of_spec_day(day_of_year_namspc::DayOfYea
 	cout << "day_of_spec_day basi"<<endl;
 	cout <<"day.get_month(): "<<day.get_month()<<endl;
 	int	day_counter = 0;
-	for (int i = 0; i < day.get_month(); i++)
+	for (auto i = 0; i < day.get_month(); i++)
 	{
 		switch (i)
 		{
@@ -125,7 +125,9 @@ int	 day_of_year_namspc::DayOfYear::day_of_spec_day(day_of_year_namspc::DayOfYea
 day_of_year_namspc::DayOfYear day_of_year_namspc::DayOfYear::operator!()
 {
 	int	now_day = day_of_spec_day(*this);
-	int	compl_day = 365 - now_day;
+	decltype(now_day)compl_day;
+	compl_day = 365 - now_day;
+	
 	DayOfYear ret(compl_day);
 	return (ret);
 }

@@ -12,12 +12,11 @@ using namespace day_of_year_namspc;
 using namespace std;
 
 /*		INPUT CONTROL FUNCTIONS		*/
-/*
-int					my_atoi(string nptr);
-int				my_isdigit(string	s);
-int						is_legal(char c);
-int					my_isalpha(string c);
-*/
+
+int					my_atoi(char* nptr);
+int				my_isdigit(char*	s);
+int					my_isalpha(char* c);
+
 
 namespace day_of_year_set_namspc
 {
