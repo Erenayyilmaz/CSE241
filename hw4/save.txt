@@ -1,2 +1,3 @@
 
-365 -> day: 31month: 12
+360 -> day: 26month: 12
+360 -> day: 26month: 12

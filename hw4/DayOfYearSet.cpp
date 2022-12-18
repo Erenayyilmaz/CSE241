@@ -206,7 +206,7 @@ day_of_year_set_namspc::DayOfYearSet  day_of_year_set_namspc::DayOfYearSet::oper
 		if (is_in_set(other.elems[i]))
 			index++;
 	}
-	cout << endl << "index: " << index<<endl<<endl;
+	//cout << endl << "index: " << index<<endl<<endl;
 	DayOfYear *tmp = new DayOfYear[index];
 	for (int i = 0; i < index; i++)
 	{

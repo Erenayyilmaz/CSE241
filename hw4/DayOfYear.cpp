@@ -32,14 +32,29 @@ void day_of_year_namspc::DayOfYear::set_spec_day(const int spec_day)
 	_spec_day = spec_day;
 }
 
-void day_of_year_namspc::DayOfYear::set_day(const int day)
+void day_of_year_namspc::DayOfYear::set_day( int day)
 {
+	if (_month == 1 || _month == 3 ||_month == 5 ||_month == 7 ||_month == 8 ||_month == 10 ||_month == 12)
+	{
+		day = day % 31;
+	}
+	else if ( _month == 4 ||_month == 6 ||_month == 9 ||_month == 11)
+	{
+		day = day % 30;
+	}
+	else
+	{
+		day = day % 28;
+	}
 	_day = day;
 }
 
 void day_of_year_namspc::DayOfYear::set_month(const int month)
 {
-	_month = month;
+	if (month > 12 || month < 0)
+		_month = month % 12;
+	else
+		_month = month;
 }
 
 bool day_of_year_namspc::DayOfYear::operator!=(DayOfYear other)

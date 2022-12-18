@@ -14,7 +14,7 @@ private:
 	int _spec_day;
 public:
 	int		get_day() const;
-	void		set_day(const int day);
+	void		set_day(int day);
 	int				get_month() const;
 	void	set_month(const int month);
 	int		get_spec_day()const;

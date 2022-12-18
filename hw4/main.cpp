@@ -26,8 +26,9 @@ int main(int argc, char const *argv[])
 	if (DRIVER_MODE == 0)
 	{
 		cout << endl << "new day object x(365) created" << endl;
-		DayOfYear x(365);
+		DayOfYear x(360);
 		add_day_to_file(new_file, x);
+		add_day_to_file(new_file, x);		
 		cout << endl  <<"x day: " << x.get_day()<<"xmonth: " << x.get_month() <<endl;
 		
 		DayOfYear *tmp;
@@ -77,26 +78,46 @@ int main(int argc, char const *argv[])
 		cout << endl << " operator!= " << endl;
 		if (test_set!=test_set2)
 			cout <<endl<<"!= work for test_set != test_set2 "<<endl;
+		if (test_set!=test_set3)
+			cout <<endl<<"!= work for test_set != test_set3 "<<endl;
 
 		cout << endl << " operator == " << endl;
 		if (test_set == test_set2)
 			cout <<endl<<"== work for test_set == test_set2 "<<endl;
+		if (test_set == test_set3)
+			cout <<endl<<"== work for test_set == test_set3 "<<endl;
 
 		cout << endl << " operator- " << endl;
 		test_set3 = test_set2.operator-(test_set);
 		cout <<endl<<" test_set3 = test_set2.operator-(test_set)"<<endl;
 		cout <<"size of set3: " << test_set3.size() <<endl;
 		//test_set3 = test_set - test_set2;
+
 		
+
 		cout << endl << "test_set3 = test_set.operator!()" << endl;
 		test_set3 = test_set.operator!();
 		cout <<"size of 3:"<< test_set3.size()<<endl;
 		cout << test_set3;
 
+		cout << endl << " operator^ " << endl;
+		cout <<endl<<" test_set3 = test_set2.operator^(test_set)"<<endl;
+		test_set3 = test_set2.operator^(test_set);
+		cout <<"size of set3: " << test_set3.size() <<endl;
+
+		cout << "test_set: ";
+		cout << test_set;
+		cout << endl;
+		cout << "test_set2: ";
+		cout << test_set2;
+		cout << endl;
+		cout << "test_set3: ";
+
+		cout << test_set3;
 	}
 	if (DRIVER_MODE == 1)
 	{
-		
+
 	}
 
 	new_file.close();
