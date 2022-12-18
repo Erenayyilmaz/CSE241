@@ -139,7 +139,7 @@ day_of_year_namspc::DayOfYear::DayOfYear(int day, int month)
 }
 
 day_of_year_namspc::DayOfYear::DayOfYear(int a_day)
-{
+{ /*CONSTRUCT WITH SPESIFIC DAY OF YEAR*/
 	set_spec_day(a_day);
 	int i, day_counter = a_day;
 	int old_day;

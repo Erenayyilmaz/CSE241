@@ -94,6 +94,7 @@ bool day_of_year_set_namspc::DayOfYearSet::is_in_set(DayOfYear &day)
 
 day_of_year_set_namspc::DayOfYearSet day_of_year_set_namspc::DayOfYearSet::operator+(DayOfYearSet &other)
 {
+	/*NEW UNION SET*/
 	int	new_size, ctr = 0;
 	for (int i = 0; i < _size; i++)
 	{
@@ -125,6 +126,7 @@ day_of_year_set_namspc::DayOfYearSet day_of_year_set_namspc::DayOfYearSet::opera
 
 void DayOfYearSet::operator+(DayOfYear &day)
 {
+	/*ADD DAY INTO SET*/
 	if (!is_in_set(day))
 	{
 		_size++;
@@ -145,7 +147,7 @@ void DayOfYearSet::operator+(DayOfYear &day)
 
 void day_of_year_set_namspc::DayOfYearSet::operator-(DayOfYear &day)
 {
-	if (is_in_set(day))
+	if (is_in_set(day))//WHETER IS IN LIST ALREADY CHECK
 	{
 		_size--;
 		DayOfYear *tmp = new DayOfYear[_size];
@@ -173,7 +175,7 @@ day_of_year_set_namspc::DayOfYearSet  day_of_year_set_namspc::DayOfYearSet::oper
 	{
 		if (!is_in_set(other.elems[i]))
 			ctr++;
-	}
+	}/*SIZE FOUND*/
 	cout << "Difference: " <<ctr<<endl;
 	int index = 0;
 	DayOfYear *tmp = new DayOfYear[ctr];
@@ -279,7 +281,7 @@ day_of_year_set_namspc::DayOfYearSet  day_of_year_set_namspc::DayOfYearSet::oper
 
 day_of_year_set_namspc::DayOfYearSet day_of_year_set_namspc::DayOfYearSet::operator!()
 {
-	int new_size = 365 - _size;
+	int new_size = 365 - _size;/*NEW SIZE OF COMPLEMENT SET */
 	if (new_size <= 0)
 		return (DayOfYearSet(nullptr, 0));
 	DayOfYear *tmp = new DayOfYear[new_size];

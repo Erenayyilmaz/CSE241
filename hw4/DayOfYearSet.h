@@ -24,32 +24,32 @@ namespace day_of_year_set_namspc
 class DayOfYearSet
 {
 private:
-	DayOfYear * elems;
-	int			_size;
+	DayOfYear * elems;	/*IT TAKE ELEMENTS OF DAYOFYEAR*/
+	int			_size;	/*SIZE OF ELEMS*/
 	//list <DayOfYear> elems;
 public:
-	int		size();
-	void	remove(DayOfYear &day);
+	int		size(); /*RETURN SIZE*/
+	void	remove(DayOfYear &day); /*REMOVE SPESIFIC DAY FROM LIST*/
 	DayOfYearSet(vector <DayOfYear> l);
 	DayOfYearSet(DayOfYear *tmp, int size_of_list);
 	DayOfYearSet();
 	~DayOfYearSet();
 
-	DayOfYearSet	operator+(DayOfYearSet &other);
-	void		operator+(DayOfYear &day);
+	DayOfYearSet	operator+(DayOfYearSet &other); /*union set*/
+	void		operator+(DayOfYear &day); /*ADD ELEMENT*/
 
-	DayOfYearSet operator-(DayOfYearSet &other);
-	void	operator-(DayOfYear &day);
+	DayOfYearSet operator-(DayOfYearSet &other); /*DIFFERENCE SET*/
+	void	operator-(DayOfYear &day); /*REMOVE ELEMENT*/
 
-	DayOfYearSet  operator^(DayOfYearSet &other);
-	DayOfYearSet  operator!();
+	DayOfYearSet  operator^(DayOfYearSet &other);  /*intersection set*/
+	DayOfYearSet  operator!(); /*COMPLEMENT set*/
 
 	bool operator!=(DayOfYearSet &other);
 	bool operator==(DayOfYearSet &other);
 
 	DayOfYear & operator[](int index);
 
-	bool is_in_set(DayOfYear &day);
+	bool is_in_set(DayOfYear &day); /*IS DAY IN SET*/
 
 	friend ostream & operator << (ostream &out, const DayOfYear &day)
 	{

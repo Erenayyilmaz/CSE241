@@ -6,23 +6,24 @@ using namespace std;
 
 void	add_day_to_file(ofstream &new_file, DayOfYear &day)
 {
+	/*				FILE WRITE FUNCTION					*/
 	new_file << '\n' << day.get_spec_day() << " -> " << "day: "  << day.get_day() << "month: " <<	day.get_month() ;
 }
 
 int main(int argc, char const *argv[])
 {
 	ofstream new_file;
-	new_file.open("save.txt",ios::app);
+	new_file.open("save.txt",ios::app);// FILE MODE APPEND
 
 
-
+	/*		THERE IS NO DRIVER_MODE MACRO BUT PROGRAM COMPILED WITH -D FLAG SO DRIVER_MODE WILL DEFINED	*/
 	if (DRIVER_MODE == 0)
 		cout << endl <<"mode auto(0)" << endl;
 	if (DRIVER_MODE == 1)
 		cout << endl <<"mode 1" << endl;
 	
 
-
+	/* 				AUTO MODE			 */
 	if (DRIVER_MODE == 0)
 	{
 		cout << endl << "new day object x(360) created" << endl;
@@ -126,7 +127,9 @@ int main(int argc, char const *argv[])
 		cout << endl << endl << "----------------"<< " operator[] " << endl;
 		cout << "(test_set.operator[](1) :" << endl;
 		cout << "day: " << (test_set.operator[](1)).get_day() << "." << (test_set.operator[](1)).get_month()<<endl;
-	}/*
+	}
+	
+	/*
 	if (DRIVER_MODE == 1)
 	{
 		int ctr = 0, ch = 0;

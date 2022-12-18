@@ -20,14 +20,14 @@ public:
 	int		get_spec_day()const;
 	void	set_spec_day(const int spec_day);
 
-	bool operator==(DayOfYear other);
+	bool operator==(DayOfYear other);/*IS EQUAL WITH ANOTHER DAY*/
 	bool operator!=(DayOfYear other);
 
 	DayOfYear();
-	DayOfYear(int a_day);
+	DayOfYear(int a_day); /*SPESIFIC DAY OF YEAR REFER a_day*/
 	DayOfYear(int day, int month);
 
-	DayOfYear operator!();
+	DayOfYear operator!(); 
 	DayOfYear(DayOfYear &other);
 
 	int	day_of_spec_day(DayOfYear day);
